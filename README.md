@@ -1,6 +1,6 @@
 # Flipkart E-commerce SQL Project
 
-![Project Banner Placeholder](https://github.com/najirh/Flipkart--SQL-Project-B01/blob/main/flipkart.jpg)
+
 
 Welcome to my SQL project, where I analyze real-time data from **Flipkart**! This project uses a dataset of **20,000+ sales records** and additional tables for payments, products, and shipping data to explore and analyze e-commerce transactions, product sales, and customer interactions. The project aims to solve business problems through SQL queries, helping Flipkart make informed decisions.
 
@@ -127,7 +127,7 @@ Feel free to add your questions and code snippets below and submit them as issue
    WHERE order_date >= CURRENT_DATE - INTERVAL '6 months';
    ```
 
-  --Retrieve all products along with their total sales revenue from completed orders.
+2. --Retrieve all products along with their total sales revenue from completed orders.
 ```sql
 select 
 	p.product_name,
@@ -139,7 +139,7 @@ where order_status='Completed'
 group by p.product_name,p.product_id
 ```
 
---List all customers and the products they have purchased, showing only those who have ordered more than 
+3.--List all customers and the products they have purchased, showing only those who have ordered more than 
 --two products.
 ```sql
 select 
@@ -150,7 +150,7 @@ from customers c join sales s
 on s.customer_id=c.customer_id
 where s.quantity > 2
 ```
---Find the total amount spent by customers in 'Gujarat' who have ordered products priced greater than 10,000.
+4.--Find the total amount spent by customers in 'Gujarat' who have ordered products priced greater than 10,000.
 
 ```sql
 select 
@@ -163,7 +163,7 @@ where c.state='Gujarat'
 group by c.customer_name,c.state
 having  sum(s.quantity*s.price_per_unit)> 10000
 ```
---Retrieve the list of all orders that have not yet been shipped.
+5.--Retrieve the list of all orders that have not yet been shipped.
 ```sql
 select 
 	sh.order_id,
@@ -174,7 +174,7 @@ on s.order_id=sh.order_id
 where delivery_status<>'shipped'
 
 ```
---Find the average order value per customer for orders with a quantity of more than 5.
+6.--Find the average order value per customer for orders with a quantity of more than 5.
 ```sql
 select 
 	c.customer_name,
@@ -185,7 +185,7 @@ on c.customer_id=s.customer_id
 where s.quantity > 5
 group by c.customer_name,s.customer_id
 ```
---Get the top 5 customers by total spending on 'Accessories'.
+7.--Get the top 5 customers by total spending on 'Accessories'.
 ```sql
 select  
 	c.customer_id,
@@ -199,7 +199,7 @@ group by p.category,p.product_id,c.customer_id,s.order_id
 order by total_spend desc
 limit 5
 ```
---Retrieve a list of customers who have not made any payment for their orders.
+8.--Retrieve a list of customers who have not made any payment for their orders.
 
 ```sql
 select * from payments
@@ -209,7 +209,7 @@ from customers c left join sales s on s.customer_id=c.customer_id left join paym
 on p.order_id=s.order_id
 where p.order_id is null
 ```
---Find the most popular product based on total quantity sold in 2023.
+9.--Find the most popular product based on total quantity sold in 2023.
 select * from sales
 select * from products
 ```sql
@@ -224,7 +224,7 @@ group by 1,2
 order by sum(quantity) desc
 limit 1
 ```
---List all orders that were cancelled and the reason for cancellation (if available).
+10.--List all orders that were cancelled and the reason for cancellation (if available).
 ```sql
 select distinct order_status from sales
 select 
@@ -233,7 +233,7 @@ select
 from sales
 where order_status='Cancelled'
 ```
---Retrieve the total quantity of products sold by category in 2023.
+11.--Retrieve the total quantity of products sold by category in 2023.
 ```sql
 select 
 	p.category,
@@ -242,7 +242,7 @@ from products p join sales s on s.product_id=p.product_id
 where EXTRACT(YEAR from s.order_date)='2023'
 group by 1
 ```
---Get the count of returned orders by shipping provider in 2023.
+12.--Get the count of returned orders by shipping provider in 2023.
 ```sql
 select distinct delivery_status from shippings
 select * from sales
@@ -256,7 +256,7 @@ where delivery_status='Returned' and EXTRACT(YEAR from shipping_date)='2023'
 group by 1
 ```
 
---Show the total revenue generated per month for the year 2023.
+13.--Show the total revenue generated per month for the year 2023.
 ```sql
 select * from sales
 select
@@ -266,7 +266,7 @@ from sales
 where extract(year from order_date)='2023'
 group by 1
 ```
---Find the customers who have made the most purchases in a single month.
+14.--Find the customers who have made the most purchases in a single month.
 ```sql
 select 
 	c.customer_id,
@@ -280,7 +280,7 @@ group by 1,2,3
 order by count(order_id) desc
 limit 1
 ```
---Retrieve the number of orders made per product category in 2023 and order by total quantity sold.
+15.--Retrieve the number of orders made per product category in 2023 and order by total quantity sold.
 ```sql
 select * from sales
 select 
@@ -292,7 +292,7 @@ on s.product_id=p.product_id
 where extract(year from s.order_date)='2023'
 group by 1,2
 ```
---List the products that have never been ordered (use LEFT JOIN between products and sales).
+16.--List the products that have never been ordered (use LEFT JOIN between products and sales).
 ```sql
 select 
 	p.product_id,
